@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  crop-disease-api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+    environment:
+      - MODEL_PATH=models/crop_disease_model.h5
+      - METADATA_PATH=models/model_metadata.json
+    restart: unless-stopped
+    
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: cropcare
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

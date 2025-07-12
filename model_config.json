@@ -1,0 +1,41 @@
+{
+  "input_shape": [224, 224, 3],
+  "batch_size": 32,
+  "epochs": 100,
+  "learning_rate": 0.001,
+  "validation_split": 0.2,
+  "test_split": 0.1,
+  "early_stopping_patience": 15,
+  "reduce_lr_patience": 10,
+  "augmentation": true,
+  "transfer_learning": true,
+  "base_model": "EfficientNetB4",
+  "fine_tune_layers": 50,
+  "dropout_rate": 0.3,
+  "l2_regularization": 0.01,
+  "class_weights": true,
+  "mixed_precision": true,
+  "data_augmentation": {
+    "rotation_range": 30,
+    "width_shift_range": 0.2,
+    "height_shift_range": 0.2,
+    "shear_range": 0.2,
+    "zoom_range": 0.2,
+    "horizontal_flip": true,
+    "vertical_flip": true,
+    "brightness_range": [0.8, 1.2],
+    "channel_shift_range": 0.2
+  },
+  "optimizer": {
+    "type": "Adam",
+    "beta_1": 0.9,
+    "beta_2": 0.999,
+    "epsilon": 1e-7
+  },
+  "scheduler": {
+    "type": "ReduceLROnPlateau",
+    "factor": 0.2,
+    "patience": 10,
+    "min_lr": 1e-7
+  }
+}
